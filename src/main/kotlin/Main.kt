@@ -1,0 +1,22 @@
+data class Tienda(val idTienda: Int,val nombreTienda: String, val direccionTienda: String)
+data class Inventario(val idArticulo:Int, val nombre:String, val comentario: String, val precio: Double, val idTienda: Int)
+fun main() {
+    val tiendadao= TiendaDao(ConnectionBuilder().connection)
+    val inventarioDao= InventarioDao(ConnectionBuilder().connection)
+    tiendadao.prepareTable()
+    inventarioDao.prepareTable()
+    tiendadao.insert(Tienda(1,"La Nena","Callejon de la Nena #123, Colonia Dulce Amor"))
+    tiendadao.insert(Tienda(2,"La Virgen","Calle Rosa de Guadalupe #2, Colonia Bajo del Cerro"))
+    tiendadao.insert(Tienda(3,"La Piscina","Avenida de los Charcos #78, Colonia El Mojado"))
+    tiendadao.insert(Tienda(4,"El Churro","Calle el Pason #666, Colonia El Viaje"))
+    tiendadao.insert(Tienda(5,"Don Pancho","Avenida del Reboso #1521, Colonia El Burro"))
+    inventarioDao.insert(Inventario(1,"CD-DVD","900 MB DE ESPACIO",35.50,5))
+    inventarioDao.insert(Inventario(2,"USB-HP","32GB, USB 3.0",155.90,4))
+    inventarioDao.insert(Inventario(3,"Laptop SONY","4GB RAM, 300 HDD, i5 2.6 GHz.",13410.07,3))
+    inventarioDao.insert(Inventario(4,"Mouse Optico","700 DPI",104.40,2))
+    inventarioDao.insert(Inventario(5,"Disco Duro","200 TB, HDD, USB 3.0",2300.00,1))
+    inventarioDao.insert(Inventario(6,"Proyector TSHB","TOSHIBA G155",5500.00,5))
+    println(tiendadao.selectAll())
+    println(inventarioDao.selectByTienda(4))
+
+}
